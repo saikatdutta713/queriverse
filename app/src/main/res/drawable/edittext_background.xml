@@ -5,7 +5,7 @@
         android:top="-3dp"
         android:bottom="-1dp" >
         <shape android:shape="rectangle">
-            <stroke android:width="2dp" android:color="@color/accent"/>
+            <stroke android:width="2dp" android:color="@color/hint"/>
         </shape>
     </item>
 </layer-list>
