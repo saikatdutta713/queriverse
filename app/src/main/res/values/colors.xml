@@ -13,5 +13,7 @@
     <color name="secondary_shade2">#DE7D08</color>
     <color name="primary_shade1">#133839</color>
     <color name="primary_shade2">#ECF8F9</color>
+    <color name="border_color">#585959</color>
+
 
 </resources>
