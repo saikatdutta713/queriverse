@@ -13,5 +13,7 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="sign_up_with">Sign up with</string>
     <string name="sign_in_message">Already have an account? Sign In</string>
+    <string name="Onboarding_tagline">Connect with the Community: It\'s in Your Hands</string>
+    <string name="Onboarding_sub_tagline">Unlock our platform QueriVerse - Connect, engage, and thrive. Your journey, your community. Take control, collaborate, and unleash your potential today.</string>
 
 </resources>
