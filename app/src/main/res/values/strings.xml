@@ -6,7 +6,12 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="todo">TODO</string>
+    <string name="name">Name</string>
     <string name="sign_up">Sign Up</string>
+    <string name="dob">Date of Birth</string>
+    <string name="create_password">Create Password</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="sign_up_with">Sign up with</string>
+    <string name="sign_in_message">Already have an account? Sign In</string>
 
 </resources>
