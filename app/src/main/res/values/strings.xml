@@ -3,14 +3,17 @@
     <string name="sign_in">Sign in</string>
     <string name="sign_in_with">Sign in with</string>
     <string name="sign_up_message">Don’t have an account? Sign up</string>
-    <string name="sign_in_message">Already have an account? Sign in</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="name">Name</string>
-    <string name="dob">Date of birth</string>
     <string name="todo">TODO</string>
-    <string name="sign_up">Sign up</string>
-    <string name="sign_up_with">Sign up with</string>
+    <string name="name">Name</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="dob">Date of Birth</string>
     <string name="create_password">Create Password</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="sign_up_with">Sign up with</string>
+    <string name="sign_in_message">Already have an account? Sign In</string>
+    <string name="Onboarding_tagline">Connect with the Community: It\'s in Your Hands</string>
+    <string name="Onboarding_sub_tagline">Unlock our platform QueriVerse - Connect, engage, and thrive. Your journey, your community. Take control, collaborate, and unleash your potential today.</string>
+
 </resources>
