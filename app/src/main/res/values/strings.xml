@@ -15,5 +15,17 @@
     <string name="sign_in_message">Already have an account? Sign In</string>
     <string name="Onboarding_tagline">Connect with the Community: It\'s in Your Hands</string>
     <string name="Onboarding_sub_tagline">Unlock our platform QueriVerse - Connect, engage, and thrive. Your journey, your community. Take control, collaborate, and unleash your potential today.</string>
-
+    <string name="profile">My Profile</string>
+    <string name="username">Elon Mask</string>
+    <string name="user_mail">elonmask@gmail.com</string>
+    <string name="follower">Followers</string>
+    <string name="following">Following</string>
+    <string name="post">Post</string>
+    <string name="number">50k</string>
+    <string name="about">About</string>
+    <string name="about_text">Lorem Ipsumis simply dummy text of the printing Lorem Ipsumis simply dummy text of the printing Lorem Ipsumis simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</string>
+    <string name="activity">Activity</string>
+    <string name="post_like">Post you have liked</string>
+    <string name="post_history">Post History</string>
+    <string name="comment_history">Comment History</string>
 </resources>
