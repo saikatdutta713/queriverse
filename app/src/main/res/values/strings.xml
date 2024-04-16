@@ -28,4 +28,13 @@
     <string name="post_like">Post you have liked</string>
     <string name="post_history">Post History</string>
     <string name="comment_history">Comment History</string>
+    <string name="search">Search Posts and Comments …</string>
+    <string name="home_btn">Home</string>
+    <string name="trends_btn">Trends</string>
+    <string name="post_btn">Post</string>
+    <string name="profile_btn">Profile</string>
+    <string name="author_name">Pritam Bag</string>
+    <string name="date_time">February 29 - 11:39</string>
+    <string name="description">ByteLure is a website for tech blogs developed using WordPress. Showcased content creation, and community engagement skills. Produced impactful technical content and optimized SEO. Demonstrates a passion for tech trends and effective communication.</string>
+    <string name="disapprove">Dislike</string>
 </resources>

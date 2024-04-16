@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:elevation="8dp"
+    app:cardCornerRadius="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:id="@+id/idLLTopBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="4dp">
+
+            <!--circle image for displaying the user image-->
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/idCVAuthor"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:src="@drawable/profile_photo"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <!--text view for displaying user name-->
+                <TextView
+                    android:id="@+id/idTVAuthorName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="3dp"
+                    android:paddingTop="3dp"
+                    android:textSize="17sp"
+                    android:text="@string/author_name"
+                    android:textColor="@color/accent"
+                    android:textStyle="bold" />
+
+                <!--textview for displaying post publish time-->
+                <TextView
+                    android:id="@+id/idTVTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="3dp"
+                    android:paddingStart="3dp"
+                    android:text="@string/date_time"
+                    android:textColor="@color/accent_shade"
+                    android:textSize="11sp"
+                    tools:ignore="RtlSymmetry" />
+
+            </LinearLayout>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@color/white"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_post_more" />
+
+        </LinearLayout>
+
+
+        <!--text view for displaying post description-->
+        <TextView
+            android:id="@+id/idTVDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/idLLTopBar"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginBottom="5dp"
+            android:paddingHorizontal="5dp"
+            android:text="@string/description"
+            android:textColor="@color/primary_shade1"
+            android:textSize="13sp" />
+
+        <!--image view to display the post image-->
+        <ImageView
+            android:id="@+id/idIVPost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/idTVDescription"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/post_image"
+            android:contentDescription="@string/todo" />
+
+        <!--linear layout for displaying facebook actions-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/idIVPost"
+            android:layout_marginVertical="5dp"
+            android:orientation="horizontal"
+            android:baselineAligned="false">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:paddingHorizontal="7dp"
+                android:paddingVertical="5dp"
+                android:background="@drawable/profile_top_banner"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_love"
+                    tools:ignore="NestedWeights"
+                    android:contentDescription="@string/todo" />
+
+                <TextView
+                    android:id="@+id/idTVLikes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="4dp"
+                    android:background="@drawable/profile_top_banner"
+                    android:drawablePadding="3dp"
+                    android:paddingStart="5dp"
+                    android:text="@string/number"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:paddingHorizontal="7dp"
+                android:paddingVertical="5dp"
+                android:background="@drawable/profile_top_banner"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_disapprove"
+                    tools:ignore="NestedWeights"
+                    android:contentDescription="@string/todo" />
+
+                <TextView
+                    android:id="@+id/idTVDislikes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="4dp"
+                    android:background="@drawable/profile_top_banner"
+                    android:drawablePadding="3dp"
+                    android:paddingStart="5dp"
+                    android:text="@string/disapprove"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/idLLShare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:paddingHorizontal="7dp"
+                android:paddingVertical="5dp"
+                android:background="@drawable/profile_top_banner"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_comments"
+                    tools:ignore="NestedWeights"
+                    android:contentDescription="@string/todo" />
+
+                <TextView
+                    android:id="@+id/idTVComments"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/profile_top_banner"
+                    android:drawablePadding="3dp"
+                    android:paddingStart="5dp"
+                    android:text="@string/number"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    tools:ignore="RtlSymmetry" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/idTVShare"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                android:gravity="end">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/todo"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_comments"
+                    tools:ignore="NestedWeights" />
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
