@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/drawable/rectangle.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Set the background color of the rectangle -->
+    <solid android:color="@color/primary" />
+
+    <!-- Set the corner radius (rounded corners) -->
+    <corners android:radius="6dp" />
+</shape>

@@ -10,7 +10,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cardLayout"
-        android:layout_width="409dp"
+        android:layout_width="355dp"
         android:layout_height="480dp"
         android:layout_marginTop="20dp"
         android:orientation="vertical"
@@ -23,7 +23,7 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card"
-            android:layout_width="372dp"
+            android:layout_width="match_parent"
             android:layout_height="105dp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
@@ -100,14 +100,12 @@
                     app:layout_constraintTop_toBottomOf="@+id/card_line"
                     app:layout_constraintVertical_bias="0.4" />
 
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-
 
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:layout_width="372dp"
+            android:layout_width="match_parent"
             android:layout_height="98dp"
             android:layout_gravity="center"
             android:layout_marginTop="35dp"
@@ -120,12 +118,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/card">
 
-
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card2"
-            android:layout_width="372dp"
+            android:layout_width="match_parent"
             android:layout_height="105dp"
             android:layout_gravity="center"
             android:layout_marginTop="40dp"
@@ -209,7 +206,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:layout_width="372dp"
+            android:layout_width="match_parent"
             android:layout_height="105dp"
             android:layout_gravity="center"
             android:layout_marginTop="55dp"
@@ -227,7 +224,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:layout_width="372dp"
+            android:layout_width="match_parent"
             android:layout_height="105dp"
             android:layout_gravity="center"
             android:layout_marginTop="60dp"
@@ -308,15 +305,13 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
         </androidx.cardview.widget.CardView>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/tagline"
-        android:layout_width="372dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
         android:text="@string/Onboarding_tagline"
@@ -334,6 +329,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="15dp"
+        android:paddingHorizontal="15dp"
         android:text="@string/Onboarding_sub_tagline"
         android:textColor="@color/white"
         android:textSize="15sp"
@@ -345,17 +341,16 @@
     <Button
         android:layout_width="250dp"
         android:layout_height="50dp"
+        android:layout_marginBottom="40dp"
         android:background="@drawable/sh_onboarding_button"
         android:text="GET STARTED"
-        android:textStyle="bold"
-        android:textSize="15sp"
         android:textColor="@color/secondary"
+        android:textSize="15sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subTagline"
-        app:layout_constraintVertical_bias="0.5"
         tools:ignore="HardcodedText" />
 
 

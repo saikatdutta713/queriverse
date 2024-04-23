@@ -14,5 +14,5 @@
     <color name="secondary_shade2">#DE7D08</color>
     <color name="primary_shade1">#133839</color>
     <color name="primary_shade2">#ECF8F9</color>
-
+    <color name="black_shade">#333131</color>
 </resources>
