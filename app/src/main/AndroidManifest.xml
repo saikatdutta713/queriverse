@@ -12,7 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QueriVerse"
         tools:targetApi="31">
-
+        <activity
+            android:name=".Otp"
+            android:exported="false" />
+        <activity
+            android:name=".ResetPassword"
+            android:exported="false" />
+        <activity
+            android:name=".RecoveryPass"
+            android:exported="false" />
         <activity
             android:name=".HomePages"
             android:exported="true">
@@ -36,9 +44,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
     </application>
 
 </manifest>
