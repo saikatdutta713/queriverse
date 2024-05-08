@@ -50,19 +50,19 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.25" />
 
-        <ImageButton
-            android:id="@+id/imageButton26"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/primary"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.97"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.25"
-            app:srcCompat="@drawable/ic_settings"
-            android:contentDescription="@string/todo" />
+<!--        <ImageButton-->
+<!--            android:id="@+id/imageButton26"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@color/primary"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.97"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="0.25"-->
+<!--            app:srcCompat="@drawable/ic_settings"-->
+<!--            android:contentDescription="@string/todo" />-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -96,17 +96,17 @@
             app:layout_constraintVertical_bias="0.5">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/userSelfProfilePic"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/ic_user"
+                android:scaleType="center"
                 android:contentDescription="@string/todo" />
 
 
         </androidx.cardview.widget.CardView>
 
         <ImageButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/uploadImageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/todo"
@@ -130,20 +130,18 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/userSelfProfileName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/username"
                 android:textColor="@color/black"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/userSelfProfileEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/user_mail"
                 android:textColor="@color/text_color"
                 android:textSize="18sp"/>
         </LinearLayout>
@@ -183,9 +181,9 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/userSelfFollower"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/number"
                 android:textColor="@color/text_color"
                 android:layout_marginTop="5dp"
                 android:textSize="15sp"
@@ -214,9 +212,9 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/profileSelfFollowing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/number"
                 android:textColor="@color/text_color"
                 android:layout_marginTop="5dp"
                 android:textSize="15sp"
@@ -247,9 +245,9 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/profileSelfPost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/number"
                 android:textColor="@color/text_color"
                 android:layout_marginTop="5dp"
                 android:textSize="15sp"
@@ -283,22 +281,28 @@
             android:textStyle="bold" />
 
         <ImageButton
-            android:id="@+id/imageButton3"
+            android:id="@+id/aboutSelfEdit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/ic_edit_button"
             android:background="@color/background"
-            android:layout_marginStart="15dp"/>
+            android:layout_marginStart="15dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:clickable="true"/>
+
 
     </LinearLayout>
 
+
+
+
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/aboutSelf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/about_text"
         android:paddingStart="40dp"
         android:paddingEnd="40dp"
         android:layout_marginTop="5dp"
@@ -311,198 +315,240 @@
         app:layout_constraintTop_toBottomOf="@+id/fourthLinearLayout" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/aboutSelfEditBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:visibility="gone"
         tools:ignore="MissingConstraints"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="15dp"
-        android:layout_marginTop="25dp"
-        android:padding="10dp"
-        android:background="@drawable/rounded_corners"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/aboutSelf">
 
-        <TextView
-            android:id="@+id/textviewActivity"
+        <!-- TextView to display the text -->
+        <EditText
+            android:id="@+id/aboutTextSelfEditBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Your text goes here"
+            android:textColor="@color/text_color"
+            android:textSize="16sp"
+            android:textAlignment="viewStart"
+            android:justificationMode="inter_word"
+            app:layout_constraintEnd_toStartOf="@+id/aboutButtonSelfEditBox"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <!-- Update button -->
+        <Button
+            android:id="@+id/aboutButtonSelfEditBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/activity"
-            android:textColor="@color/text_color"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:id="@+id/fifthLinearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:padding="5dp"
-            android:layout_marginVertical="10dp"
-            android:layout_marginHorizontal="20dp"
-            android:background="@drawable/profile_top_banner"
+            android:text="Update"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textviewActivity">
-
-            <ImageView
-                android:id="@+id/imageView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_like"
-                android:layout_marginStart="20dp"/>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1"
-                android:layout_marginStart="30dp"
-                tools:ignore="RtlCompat">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/post_like"
-                    android:textColor="@color/text_color"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/number"
-                    android:textColor="@color/text_color"
-                    android:textSize="15sp"
-                    android:textStyle="bold"/>
-
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/imageView50"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_right_arrow"
-                android:layout_marginEnd="10dp"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/sixthLinearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:padding="5dp"
-            android:layout_marginVertical="10dp"
-            android:layout_marginHorizontal="20dp"
-            android:background="@drawable/profile_top_banner"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fifthLinearLayout">
-
-            <ImageView
-                android:id="@+id/imageView7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_post_history"
-                android:layout_marginStart="20dp"/>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1"
-                android:layout_marginStart="30dp"
-                tools:ignore="RtlCompat">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/post_history"
-                    android:textColor="@color/text_color"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/number"
-                    android:textColor="@color/text_color"
-                    android:textSize="15sp"
-                    android:textStyle="bold"/>
-
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/imageView51"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_right_arrow"
-                android:layout_marginEnd="10dp"
-                android:contentDescription="@string/todo" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/seventhLinearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:padding="5dp"
-            android:layout_marginVertical="10dp"
-            android:layout_marginHorizontal="20dp"
-            android:background="@drawable/profile_top_banner"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sixthLinearLayout">
-
-            <ImageView
-                android:id="@+id/imageView8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_comment_history"
-                android:layout_marginStart="20dp"/>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1"
-                android:layout_marginStart="30dp"
-                tools:ignore="RtlCompat">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/comment_history"
-                    android:textColor="@color/text_color"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/number"
-                    android:textColor="@color/text_color"
-                    android:textSize="15sp"
-                    android:textStyle="bold"/>
-
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_right_arrow"
-                android:layout_marginEnd="10dp"/>
-
-        </LinearLayout>
-
-
-
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        tools:ignore="MissingConstraints"-->
+<!--        android:layout_marginStart="15dp"-->
+<!--        android:layout_marginEnd="15dp"-->
+<!--        android:layout_marginBottom="15dp"-->
+<!--        android:layout_marginTop="25dp"-->
+<!--        android:padding="10dp"-->
+<!--        android:background="@drawable/rounded_corners"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/aboutSelfEditBox">-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/textviewActivity"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/activity"-->
+<!--            android:textColor="@color/text_color"-->
+<!--            android:textSize="18sp"-->
+<!--            android:textStyle="bold" />-->
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/fifthLinearLayout"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:gravity="center_vertical"-->
+<!--            android:padding="5dp"-->
+<!--            android:layout_marginVertical="10dp"-->
+<!--            android:layout_marginHorizontal="20dp"-->
+<!--            android:background="@drawable/profile_top_banner"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/textviewActivity">-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/imageView6"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:srcCompat="@drawable/ic_like"-->
+<!--                android:layout_marginStart="20dp"/>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="vertical"-->
+<!--                android:layout_weight="1"-->
+<!--                android:layout_marginStart="30dp"-->
+<!--                tools:ignore="RtlCompat">-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/post_like"-->
+<!--                    android:textColor="@color/text_color"-->
+<!--                    android:textSize="17sp"-->
+<!--                    android:textStyle="bold" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/number"-->
+<!--                    android:textColor="@color/text_color"-->
+<!--                    android:textSize="15sp"-->
+<!--                    android:textStyle="bold"/>-->
+
+<!--            </LinearLayout>-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/imageView50"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:srcCompat="@drawable/ic_right_arrow"-->
+<!--                android:layout_marginEnd="10dp"/>-->
+
+<!--        </LinearLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/sixthLinearLayout"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:gravity="center_vertical"-->
+<!--            android:padding="5dp"-->
+<!--            android:layout_marginVertical="10dp"-->
+<!--            android:layout_marginHorizontal="20dp"-->
+<!--            android:background="@drawable/profile_top_banner"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/fifthLinearLayout">-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/imageView7"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:srcCompat="@drawable/ic_post_history"-->
+<!--                android:layout_marginStart="20dp"/>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="vertical"-->
+<!--                android:layout_weight="1"-->
+<!--                android:layout_marginStart="30dp"-->
+<!--                tools:ignore="RtlCompat">-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/post_history"-->
+<!--                    android:textColor="@color/text_color"-->
+<!--                    android:textSize="17sp"-->
+<!--                    android:textStyle="bold" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/number"-->
+<!--                    android:textColor="@color/text_color"-->
+<!--                    android:textSize="15sp"-->
+<!--                    android:textStyle="bold"/>-->
+
+<!--            </LinearLayout>-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/imageView51"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:srcCompat="@drawable/ic_right_arrow"-->
+<!--                android:layout_marginEnd="10dp"-->
+<!--                android:contentDescription="@string/todo" />-->
+
+<!--        </LinearLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/seventhLinearLayout"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:gravity="center_vertical"-->
+<!--            android:padding="5dp"-->
+<!--            android:layout_marginVertical="10dp"-->
+<!--            android:layout_marginHorizontal="20dp"-->
+<!--            android:background="@drawable/profile_top_banner"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/sixthLinearLayout">-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/imageView8"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:srcCompat="@drawable/ic_comment_history"-->
+<!--                android:layout_marginStart="20dp"/>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="vertical"-->
+<!--                android:layout_weight="1"-->
+<!--                android:layout_marginStart="30dp"-->
+<!--                tools:ignore="RtlCompat">-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/comment_history"-->
+<!--                    android:textColor="@color/text_color"-->
+<!--                    android:textSize="17sp"-->
+<!--                    android:textStyle="bold" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/number"-->
+<!--                    android:textColor="@color/text_color"-->
+<!--                    android:textSize="15sp"-->
+<!--                    android:textStyle="bold"/>-->
+
+<!--            </LinearLayout>-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/imageView5"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:srcCompat="@drawable/ic_right_arrow"-->
+<!--                android:layout_marginEnd="10dp"/>-->
+
+<!--        </LinearLayout>-->
+
+
+
+
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

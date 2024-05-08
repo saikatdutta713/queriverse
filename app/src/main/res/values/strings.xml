@@ -46,4 +46,6 @@
     <string name="date_time">February 29 - 11:39</string>
     <string name="description">ByteLure is a website for tech blogs developed using WordPress. Showcased content creation, and community engagement skills. Produced impactful technical content and optimized SEO. Demonstrates a passion for tech trends and effective communication.</string>
     <string name="disapprove">Dislike</string>
+    <string name="follow">Follow</string>
+    <string name="write_a_comment">Write a comment...</string>
 </resources>
