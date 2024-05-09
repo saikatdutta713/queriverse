@@ -40,7 +40,7 @@ public class UserPostAdapter extends RecyclerView.Adapter<UserPostAdapter.UserPo
     private final List<UserPost> userPostList;
     private final Context context;
     private final String postId; // Add post ID field
-    private final int loggedinUserId = 5; // Set the logged in user ID to 5
+    private final String loggedinUserId = "5"; // Set the logged in user ID to 5
 
     public UserPostAdapter(List<UserPost> userPostList, Context context, String postId) {
         this.userPostList = userPostList;
@@ -119,6 +119,10 @@ public class UserPostAdapter extends RecyclerView.Adapter<UserPostAdapter.UserPo
         holder.dislikesView.setText(userPost.getPostDislikes());
         holder.commentsView.setText(userPost.getPostComments());
 
+        // Set click listener for the like button
+        holder.likeImage.setOnClickListener(v -> likePost(userPost));
+
+        holder.dislikeImage.setOnClickListener(v -> dislikePost(userPost));
     }
 
     @Override
@@ -128,7 +132,7 @@ public class UserPostAdapter extends RecyclerView.Adapter<UserPostAdapter.UserPo
 
     static class UserPostViewHolder extends RecyclerView.ViewHolder{
 
-        private final ImageView authorImageView,ivView,likeImage;
+        private final ImageView authorImageView,ivView,likeImage,dislikeImage;
         private final TextView nameView,dateView,descriptionView,likesView,dislikesView,commentsView;
         private ImageButton shareButton;
         private RelativeLayout postRelativeLayout;
@@ -146,6 +150,7 @@ public class UserPostAdapter extends RecyclerView.Adapter<UserPostAdapter.UserPo
             shareButton = itemView.findViewById(R.id.idTVShare);
             postRelativeLayout = itemView.findViewById(R.id.postRelativeLayout);
             likeImage = itemView.findViewById(R.id.likeImage);
+            dislikeImage = itemView.findViewById(R.id.dislikeImage);
 
         }
     }
@@ -169,14 +174,129 @@ public class UserPostAdapter extends RecyclerView.Adapter<UserPostAdapter.UserPo
     }
 
     // Method to handle post like action
+    @SuppressLint("StaticFieldLeak")
+    private void likePost(UserPost userPost) {
+        // Implement the logic to like the post
+        String likeEndpoint = "https://queriverse.bytelure.in/api/posts/" + userPost.getPostId() + "/like";
+
+        new AsyncTask<Void, Void, Integer>() {
+            @Override
+            protected Integer doInBackground(Void... voids) {
+                try {
+                    // Create JSON object with user ID
+                    JSONObject requestBody = new JSONObject();
+                    requestBody.put("user", loggedinUserId); // Assuming loggedinUserId is the user ID
+
+                    // Make the API call to like the post with user ID in the request body
+                    URL url = new URL(likeEndpoint);
+                    HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                    urlConnection.setRequestMethod("POST");
+                    urlConnection.setRequestProperty("Content-Type", "application/json");
+                    urlConnection.setDoOutput(true);
+                    OutputStream outputStream = urlConnection.getOutputStream();
+                    outputStream.write(requestBody.toString().getBytes("UTF-8"));
+                    outputStream.close();
+
+                    int responseCode = urlConnection.getResponseCode();
+                    // Return the updated likes count from the server response
+                    return responseCode == HttpURLConnection.HTTP_OK ? Integer.parseInt(userPost.getPostLikes()) + 1 : -1;
+                } catch (IOException | JSONException e) {
+                    e.printStackTrace();
+                    return -1;
+                }
+            }
+
+            @Override
+            protected void onPostExecute(Integer updatedLikesCount) {
+                super.onPostExecute(updatedLikesCount);
+                if (updatedLikesCount >= 0) {
+                    // Update the likes count in the UserPost object
+                    int currentLikes = Integer.parseInt(userPost.getPostLikes());
+                    userPost.setPostLikes(String.valueOf(currentLikes - 1));
+                    // Mark the post as liked
+                    userPost.setLikedByUser(true);
+                    // Notify the adapter to update the UI
+                    notifyDataSetChanged();
+                    // Show success message
+                    Toast.makeText(context, "Post Like Removed", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Show failure message
+                    Toast.makeText(context, "Post Liked", Toast.LENGTH_SHORT).show();
+                    // Update the likes count in the UserPost object
+                    int currentLikes = Integer.parseInt(userPost.getPostLikes());
+                    userPost.setPostLikes(String.valueOf(currentLikes + 1)); // Increment like count
+                    // Notify the adapter to update the UI
+                    notifyDataSetChanged();
+                }
+            }
 
 
 
+        }.execute();
+    }
+
+
+    // Method to handle post dislike action
+    @SuppressLint("StaticFieldLeak")
+    private void dislikePost(UserPost userPost) {
+        // Implement the logic to like the post
+        String dislikeEndpoint = "https://queriverse.bytelure.in/api/posts/" + userPost.getPostId() + "/dislike";
+
+        new AsyncTask<Void, Void, Integer>() {
+            @Override
+            protected Integer doInBackground(Void... voids) {
+                try {
+                    // Create JSON object with user ID
+                    JSONObject requestBody = new JSONObject();
+                    requestBody.put("user", loggedinUserId); // Assuming loggedinUserId is the user ID
+
+                    // Make the API call to dislike the post with user ID in the request body
+                    URL url = new URL(dislikeEndpoint);
+                    HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                    urlConnection.setRequestMethod("POST");
+                    urlConnection.setRequestProperty("Content-Type", "application/json");
+                    urlConnection.setDoOutput(true);
+                    OutputStream outputStream = urlConnection.getOutputStream();
+                    outputStream.write(requestBody.toString().getBytes("UTF-8"));
+                    outputStream.close();
+
+                    int responseCode = urlConnection.getResponseCode();
+                    // Return the updated dislikes count from the server response
+                    return responseCode == HttpURLConnection.HTTP_OK ? Integer.parseInt(userPost.getPostDislikes()) + 1 : -1;
+                } catch (IOException | JSONException e) {
+                    e.printStackTrace();
+                    return -1;
+                }
+            }
+
+            @Override
+            protected void onPostExecute(Integer updatedDisikesCount) {
+                super.onPostExecute(updatedDisikesCount);
+                if (updatedDisikesCount >= 0) {
+                    // Update the likes count in the UserPost object
+                    int currentDislikes = Integer.parseInt(userPost.getPostDislikes());
+                    userPost.setPostDislikes(String.valueOf(currentDislikes - 1));
+                    // Mark the post as liked
+                    userPost.setDislikedByUser(true);
+                    // Notify the adapter to update the UI
+                    notifyDataSetChanged();
+                    // Show success message
+                    Toast.makeText(context, "Post Dislike Removed", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Show failure message
+                    Toast.makeText(context, "Post Disliked", Toast.LENGTH_SHORT).show();
+                    // Update the likes count in the UserPost object
+                    int currentDislikes = Integer.parseInt(userPost.getPostDislikes());
+                    userPost.setPostDislikes(String.valueOf(currentDislikes + 1)); // Increment like count
+                    // Notify the adapter to update the UI
+                    notifyDataSetChanged();
+                }
+            }
 
 
 
-
-
+        }.execute();
+    }
 
 
 }

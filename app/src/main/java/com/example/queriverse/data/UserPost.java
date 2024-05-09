@@ -11,8 +11,9 @@ public class UserPost {
     private String postLikes;
     private String postDislikes;
     private String postComments;
+    private boolean likedByUser;
+    private boolean dislikedByUser;
 
-    private boolean isLikedByUser;
 
     public UserPost(String postId, String userId, String authorImageUrl, String authorName, String postDate, String postDescription, String postImageUrl, String postLikes, String postDislikes, String postComments) {
         this.postId = postId;
@@ -25,7 +26,8 @@ public class UserPost {
         this.postLikes = postLikes;
         this.postDislikes = postDislikes;
         this.postComments = postComments;
-        this.isLikedByUser = false; // Initially, the post is not liked by the user
+        this.likedByUser = likedByUser;
+        this.dislikedByUser = dislikedByUser;
     }
 
     public String getUserId() {
@@ -110,10 +112,17 @@ public class UserPost {
     }
 
     public boolean isLikedByUser() {
-        return isLikedByUser;
+        return likedByUser;
     }
 
-    public void setLikedByUser(boolean liked) {
-        isLikedByUser = liked;
+    public void setLikedByUser(boolean likedByUser) {
+        this.likedByUser = likedByUser;
+    }
+    public boolean isDislikedByUser() {
+        return dislikedByUser;
+    }
+
+    public void setDislikedByUser(boolean dislikedByUser) {
+        this.dislikedByUser = dislikedByUser;
     }
 }
