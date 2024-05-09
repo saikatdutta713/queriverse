@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:title="Home"
+        android:icon="@drawable/ic_a_lock"
+        tools:ignore="HardcodedText" />
+
+    <item
+        android:id="@+id/trends"
+        android:title="Trends"
+        android:icon="@drawable/ic_a_lock"
+        tools:ignore="HardcodedText" />
+    <item
+        android:id="@+id/post"
+        android:title="Post"
+        android:icon="@drawable/ic_a_lock"
+        tools:ignore="HardcodedText" />
+    <item
+        android:id="@+id/profile"
+        android:title="Profile"
+        android:icon="@drawable/ic_a_lock"
+        tools:ignore="HardcodedText" />
+</menu>

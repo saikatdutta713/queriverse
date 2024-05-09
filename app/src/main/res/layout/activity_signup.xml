@@ -68,7 +68,7 @@
 
 
         <EditText
-            android:id="@+id/editTextText1"
+            android:id="@+id/name"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="32dp"
@@ -83,11 +83,12 @@
             android:inputType="text"
             android:textColorHint="@color/hint"
             android:textSize="18sp"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2" />
         <EditText
-            android:id="@+id/editTextText3"
+            android:id="@+id/email"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="32dp"
@@ -103,12 +104,13 @@
             android:inputType="text"
             android:textColorHint="@color/hint"
             android:textSize="18sp"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextText1" />
+            app:layout_constraintTop_toBottomOf="@+id/name" />
 
         <EditText
-            android:id="@+id/editTextText4"
+            android:id="@+id/dob"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="32dp"
@@ -121,15 +123,16 @@
             android:drawablePadding="16dp"
             android:ems="10"
             android:hint="@string/dob"
-            android:inputType="text"
+            android:inputType="date"
             android:textColorHint="@color/hint"
             android:textSize="18sp"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextText3" />
+            app:layout_constraintTop_toBottomOf="@+id/email" />
 
         <EditText
-            android:id="@+id/editTextText5"
+            android:id="@+id/password"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="32dp"
@@ -145,13 +148,14 @@
             android:inputType="text"
             android:textColorHint="@color/hint"
             android:textSize="18sp"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextText4" />
+            app:layout_constraintTop_toBottomOf="@+id/dob" />
 
 
         <EditText
-            android:id="@+id/editTextText2"
+            android:id="@+id/cpassword"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="32dp"
@@ -166,9 +170,10 @@
             android:inputType="text"
             android:textColorHint="@color/hint"
             android:textSize="18sp"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextText5"
+            app:layout_constraintTop_toBottomOf="@+id/password"
             android:autofillHints="" />
 
         <Button
@@ -181,9 +186,10 @@
             android:backgroundTint="@color/secondary"
             android:text="@string/sign_up"
             android:textSize="18sp"
+            android:onClick="signup"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextText2" />
+            app:layout_constraintTop_toBottomOf="@+id/cpassword" />
 
         <Button
             android:id="@+id/button1"

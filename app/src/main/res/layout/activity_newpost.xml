@@ -20,7 +20,7 @@
         android:layout_marginTop="24dp"
         android:orientation="vertical">
 
-        <Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
                         android:background="@drawable/sh_image_avatar"
                         android:src="@drawable/ic_logo"
                         tools:ignore="ContentDescription" />
-                    
+
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -98,8 +98,8 @@
                     tools:ignore="ContentDescription" />
             </LinearLayout>
 
-        </Toolbar>
-        
+        </androidx.appcompat.widget.Toolbar>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

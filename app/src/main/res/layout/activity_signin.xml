@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".Signin"
     android:background="@color/background">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -68,7 +68,7 @@
 
 
         <EditText
-            android:id="@+id/editTextText1"
+            android:id="@+id/name"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="32dp"
@@ -84,12 +84,13 @@
             android:inputType="text"
             android:textColorHint="@color/hint"
             android:textSize="18sp"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
         <EditText
-            android:id="@+id/editTextText2"
+            android:id="@+id/password"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="32dp"
@@ -104,9 +105,10 @@
             android:inputType="text"
             android:textColorHint="@color/hint"
             android:textSize="18sp"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editTextText1"
+            app:layout_constraintTop_toBottomOf="@id/name"
             android:autofillHints="" />
 
         <Button
@@ -119,9 +121,10 @@
             android:backgroundTint="@color/secondary"
             android:text="@string/sign_in"
             android:textSize="18sp"
+            android:onClick="loginHandle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextText2" />
+            app:layout_constraintTop_toBottomOf="@+id/password" />
 
         <Button
             android:id="@+id/button1"

@@ -1,6 +1,9 @@
 package com.example.queriverse;
 
+import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +13,9 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class Newpost extends AppCompatActivity {
 
+    private static final String TAG = "Newpost";
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,5 +26,10 @@ public class Newpost extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+//        SharedPreferences sharedPreferences = getSharedPreferences("Queriverse", MODE_PRIVATE);
+//        String user = sharedPreferences.getString("user",null);
+//        Log.d(TAG, "onCreate: "+user);
+
     }
 }
