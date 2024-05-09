@@ -21,11 +21,11 @@
             android:exported="false" />
 
         <activity
-            android:name=".Profile"
+            android:name=".HomePages"
             android:exported="false" />
 
         <activity
-            android:name=".HomePages"
+            android:name=".Profile"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
