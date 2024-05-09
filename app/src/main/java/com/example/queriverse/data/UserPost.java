@@ -1,34 +1,45 @@
 package com.example.queriverse.data;
 
 public class UserPost {
-
-    private int authorImage;
+    private String postId;
+    private String userId;
+    private String authorImageUrl;
     private String authorName;
     private String postDate;
     private String postDescription;
-    private int postIV;
+    private String postImageUrl; // New field for post image URL
     private String postLikes;
     private String postDislikes;
     private String postComments;
+    private boolean likedByUser;
+    private boolean dislikedByUser;
 
-    public UserPost(int authorImage, String authorName, String postDate, String postDescription, int postIV, String postLikes, String postDislikes, String postComments) {
-        this.authorImage = authorImage;
+
+    public UserPost(String postId, String userId, String authorImageUrl, String authorName, String postDate, String postDescription, String postImageUrl, String postLikes, String postDislikes, String postComments) {
+        this.postId = postId;
+        this.userId = userId;
+        this.authorImageUrl = authorImageUrl;
         this.authorName = authorName;
         this.postDate = postDate;
         this.postDescription = postDescription;
-        this.postIV = postIV;
+        this.postImageUrl = postImageUrl;
         this.postLikes = postLikes;
         this.postDislikes = postDislikes;
         this.postComments = postComments;
+        this.likedByUser = likedByUser;
+        this.dislikedByUser = dislikedByUser;
     }
 
-
-    public int getAuthorImage() {
-        return authorImage;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setAuthorImage(int authorImage) {
-        this.authorImage = authorImage;
+    public String getAuthorImageUrl() {
+        return authorImageUrl;
+    }
+
+    public void setAuthorImage(String authorImage) {
+        this.authorImageUrl = authorImageUrl;
     }
 
     public String getAuthorName() {
@@ -55,12 +66,12 @@ public class UserPost {
         this.postDescription = postDescription;
     }
 
-    public int getPostIV() {
-        return postIV;
+    public String getPostImageUrl() {
+        return postImageUrl;
     }
 
-    public void setPostIV(int postIV) {
-        this.postIV = postIV;
+    public void setPostImageUrl(String postImageUrl) {
+        this.postImageUrl = postImageUrl;
     }
 
     public String getPostLikes() {
@@ -85,5 +96,33 @@ public class UserPost {
 
     public void setPostComments(String postComments) {
         this.postComments = postComments;
+    }
+
+    public String generatePostLink() {
+        return "https://queriverse.bytelure.in/api/posts" + postId;
+    }
+
+    // Getter and setter methods for postId if not already implemented
+    public String getPostId() {
+        return postId;
+    }
+
+    public void setPostId(String postId) {
+        this.postId = postId;
+    }
+
+    public boolean isLikedByUser() {
+        return likedByUser;
+    }
+
+    public void setLikedByUser(boolean likedByUser) {
+        this.likedByUser = likedByUser;
+    }
+    public boolean isDislikedByUser() {
+        return dislikedByUser;
+    }
+
+    public void setDislikedByUser(boolean dislikedByUser) {
+        this.dislikedByUser = dislikedByUser;
     }
 }

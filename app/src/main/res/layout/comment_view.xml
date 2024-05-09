@@ -1,50 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginEnd="8dp"
+    android:layout_marginVertical="4dp"
+    android:layout_marginStart="25dp"
     android:elevation="8dp"
     app:cardCornerRadius="8dp">
 
     <RelativeLayout
-        android:id="@+id/postRelativeLayout"
+        android:id="@+id/commentPostView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white">
+        android:background="@color/white"
+        tools:ignore="MissingConstraints">
 
         <LinearLayout
-            android:id="@+id/idLLTopBar"
+            android:id="@+id/idCommentLLTopBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
             android:padding="4dp">
 
-            <!--circle image for displaying the user image-->
-<!--            <de.hdodenhof.circleimageview.CircleImageView-->
-<!--                android:id="@+id/idCVAuthor"-->
-<!--                android:layout_width="50dp"-->
-<!--                android:layout_height="50dp"-->
-<!--                android:layout_margin="5dp"/>-->
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
                 <!-- Border View -->
                 <View
-                    android:layout_width="55dp"
-                    android:layout_height="55dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:background="@drawable/circle_border"
                     android:layout_gravity="center"/>
 
                 <!-- CircleImageView -->
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/idCVAuthor"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:id="@+id/idCommentCVAuthor"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     android:layout_margin="5dp"/>
 
             </FrameLayout>
@@ -58,19 +55,19 @@
 
                 <!--text view for displaying user name-->
                 <TextView
-                    android:id="@+id/idTVAuthorName"
+                    android:id="@+id/idCommentAuthorName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="3dp"
                     android:paddingTop="3dp"
-                    android:textSize="17sp"
+                    android:textSize="16sp"
                     android:text="@string/author_name"
-                    android:textColor="@color/accent"
+                    android:textColor="@color/secondary"
                     android:textStyle="bold" />
 
                 <!--textview for displaying post publish time-->
                 <TextView
-                    android:id="@+id/idTVTime"
+                    android:id="@+id/idCommentTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="3dp"
@@ -95,10 +92,10 @@
 
         <!--text view for displaying post description-->
         <TextView
-            android:id="@+id/idTVDescription"
+            android:id="@+id/idCommentDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/idLLTopBar"
+            android:layout_below="@id/idCommentLLTopBar"
             android:layout_marginHorizontal="5dp"
             android:layout_marginBottom="5dp"
             android:paddingHorizontal="5dp"
@@ -106,21 +103,11 @@
             android:textColor="@color/primary_shade1"
             android:textSize="13sp" />
 
-        <!--image view to display the post image-->
-        <ImageView
-            android:id="@+id/idIVPost"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/idTVDescription"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
-            android:contentDescription="@string/todo" />
-
         <!--linear layout for displaying facebook actions-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/idIVPost"
+            android:layout_below="@id/idCommentDescription"
             android:layout_marginVertical="5dp"
             android:orientation="horizontal"
             android:baselineAligned="false">
@@ -135,87 +122,18 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/likeImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_love"
-                    tools:ignore="NestedWeights"
                     android:contentDescription="@string/todo" />
 
                 <TextView
-                    android:id="@+id/idTVLikes"
+                    android:id="@+id/idCommentLikes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="4dp"
-                    android:background="@drawable/profile_top_banner"
-                    android:drawablePadding="3dp"
-                    android:paddingStart="5dp"
-                    android:text="@string/number"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:paddingHorizontal="7dp"
-                android:paddingVertical="5dp"
-                android:background="@drawable/profile_top_banner"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/dislikeImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_disapprove"
-                    tools:ignore="NestedWeights"
-                    android:contentDescription="@string/todo" />
-
-                <TextView
-                    android:id="@+id/idTVDislikes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginHorizontal="4dp"
-                    android:background="@drawable/profile_top_banner"
-                    android:drawablePadding="3dp"
-                    android:paddingStart="5dp"
-                    android:text="@string/disapprove"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/idLLShare"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:paddingHorizontal="7dp"
-                android:paddingVertical="5dp"
-                android:background="@drawable/profile_top_banner"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:src="@drawable/ic_comments"
-                    tools:ignore="NestedWeights"
-                    android:contentDescription="@string/todo" />
-
-                <TextView
-                    android:id="@+id/idTVComments"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginHorizontal="4dp"
-                    android:layout_weight="1"
                     android:background="@drawable/profile_top_banner"
                     android:drawablePadding="3dp"
                     android:paddingStart="5dp"
@@ -227,28 +145,35 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:orientation="horizontal"
-                android:gravity="end">
-                <ImageButton
-                    android:id="@+id/idTVShare"
+                android:paddingHorizontal="7dp"
+                android:paddingVertical="5dp"
+                android:background="@drawable/profile_top_banner"
+                android:orientation="horizontal">
+
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:contentDescription="@string/todo"
-                    android:padding="5dp"
-                    android:background="@color/white"
-                    android:src="@drawable/ic_share"
-                    tools:ignore="NestedWeights" />
+                    android:src="@drawable/ic_disapprove"
+                    android:contentDescription="@string/todo" />
 
+                <TextView
+                    android:id="@+id/idCommentDislikes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="4dp"
+                    android:background="@drawable/profile_top_banner"
+                    android:drawablePadding="3dp"
+                    android:paddingStart="5dp"
+                    android:text="@string/disapprove"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    tools:ignore="RtlSymmetry" />
             </LinearLayout>
-
-
-
         </LinearLayout>
-
     </RelativeLayout>
-
 </androidx.cardview.widget.CardView>

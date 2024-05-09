@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">QueriVerse</string>
     <string name="sign_in">Sign in</string>
+    <string name="recovery">Forget Password</string>
+    <string name="recover">Recover</string>
+    <string name="recover_message">Enter Email which is registerd with your QueriVerse account</string>
     <string name="sign_in_with">Sign in with</string>
     <string name="sign_up_message">Don’t have an account? Sign up</string>
     <string name="email">Email</string>
@@ -9,6 +12,12 @@
     <string name="name">Name</string>
     <string name="sign_up">Sign Up</string>
     <string name="dob">Date of Birth</string>
+    <string name="submit">Submit</string>
+    <string name="otp">OTP Validation</string>
+    <string name="enter_otp">Enter OTP</string>
+    <string name="otp_message">OTP has been sent to your registered email address</string>
+    <string name="create_new_password">Create Password</string>
+    <string name="new_password">New Password</string>
     <string name="create_password">Create Password</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="sign_up_with">Sign up with</string>
@@ -37,4 +46,6 @@
     <string name="date_time">February 29 - 11:39</string>
     <string name="description">ByteLure is a website for tech blogs developed using WordPress. Showcased content creation, and community engagement skills. Produced impactful technical content and optimized SEO. Demonstrates a passion for tech trends and effective communication.</string>
     <string name="disapprove">Dislike</string>
+    <string name="follow">Follow</string>
+    <string name="write_a_comment">Write a comment...</string>
 </resources>

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" >
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.queriverse">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -11,9 +15,49 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.QueriVerse"
-        tools:targetApi="31" >
+        tools:targetApi="31">
         <activity
             android:name=".Signin"
+            android:exported="false" />
+
+        <activity
+            android:name=".Profile"
+            android:exported="false" />
+
+        <activity
+            android:name=".HomePages"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!-- Define the scheme, host, and path patterns for your deep links -->
+                <data
+                    android:host="queriverse.bytelure.in"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SinglePost"
+            android:exported="false" />
+        <activity
+            android:name=".OtherUserProfile"
+            android:exported="false" />
+        <activity
+            android:name=".Otp"
+            android:exported="false" />
+        <activity
+            android:name=".ResetPassword"
+            android:exported="false" />
+        <activity
+            android:name=".RecoveryPass"
             android:exported="false" />
         <activity
             android:name=".Splash"
@@ -29,8 +73,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false" >
-        </activity>
+            android:exported="false" />
     </application>
 
 </manifest>
