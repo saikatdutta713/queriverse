@@ -3,6 +3,7 @@ package com.example.queriverse;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,6 +17,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.queriverse.data.ProfileOtherUser;
@@ -30,6 +33,8 @@ public class OtherUserProfile extends AppCompatActivity {
 
     private TextView nameTextView, emailTextView, followerTextView, followingTextView, numberOfPostTextView, aboutTextView;
     private ImageView profileImageView;
+    private Button followButton;
+    private final String loggedinUserId = "5"; // Set the logged in user ID to 5
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +59,7 @@ public class OtherUserProfile extends AppCompatActivity {
         followingTextView = findViewById(R.id.profileFollowing);
         numberOfPostTextView = findViewById(R.id.profilePost);
         aboutTextView = findViewById(R.id.about);
+        followButton = findViewById(R.id.userProfileFollow);
 
         // Set OnClickListener for the back button
         ImageButton backButton = findViewById(R.id.backButton);
@@ -64,10 +70,74 @@ public class OtherUserProfile extends AppCompatActivity {
             }
         });
 
+        // Set OnClickListener for the follow button
+        followButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String apiUrl = "https://queriverse.bytelure.in/api/users/" + loggedinUserId + "/follow/" + userId;
+
+                RequestQueue requestQueue = Volley.newRequestQueue(OtherUserProfile.this);
+                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, apiUrl, null,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                try {
+                                    // Check if the "follow" key is present in the JSON response
+                                    if (response.has("follow")) {
+                                        // Retrieve the boolean value of the "follow" key
+                                        boolean isFollowed = response.getBoolean("follow");
+
+                                        // Update followers count in UI based on follow/unfollow action
+                                        int currentFollowersCount = Integer.parseInt(followerTextView.getText().toString());
+                                        if (isFollowed) {
+                                            // User is followed successfully
+                                            Toast.makeText(OtherUserProfile.this, "You are now following this user", Toast.LENGTH_SHORT).show();
+                                            // Increment followers count by 1
+                                            followerTextView.setText(String.valueOf(currentFollowersCount + 1));
+                                        } else {
+                                            // User is unfollowed successfully
+                                            Toast.makeText(OtherUserProfile.this, "You have unfollowed this user", Toast.LENGTH_SHORT).show();
+                                            // Decrement followers count by 1 (ensure count doesn't go below 0)
+                                            followerTextView.setText(String.valueOf(Math.max(0, currentFollowersCount - 1)));
+                                        }
+                                    } else {
+                                        // Handle the case where the "follow" key is missing
+                                        Log.e("JSONParsingError", "No value for 'follow' in JSON response");
+                                        Toast.makeText(OtherUserProfile.this, "No value for 'follow' in JSON response", Toast.LENGTH_SHORT).show();
+                                    }
+                                } catch (JSONException e) {
+                                    // JSON parsing error
+                                    Log.e("JSONParsingError", "Error parsing JSON response: " + e.getMessage(), e);
+                                    Toast.makeText(OtherUserProfile.this, "Error parsing JSON response", Toast.LENGTH_SHORT).show();
+                                }
+
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Log.e("VolleyError", "Error making follow/unfollow request", error);
+                                Toast.makeText(OtherUserProfile.this, "Error making follow/unfollow request", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                requestQueue.add(jsonObjectRequest);
+            }
+        });
+
+
+
+
+
+
+
+
+
+
 
         // Make Api call
         makeApiCall(userId);
     }
+
 
     private void makeApiCall(String userId) {
         String apiUrl = "https://queriverse.bytelure.in/api/users/" + userId;

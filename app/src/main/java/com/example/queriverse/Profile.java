@@ -7,10 +7,12 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,7 +47,7 @@ public class Profile extends AppCompatActivity {
     private TextView nameTextViewSelf, emailTextViewSelf, followerTextViewSelf, followingTextViewSelf, numberOfPostTextViewSelf, aboutTextViewSelf, updatedAbout;
     private ImageView profileImageViewSelf;
 
-    private ImageButton editButtonAbout;
+    private ImageButton editButtonAbout, backButton,settingsButton;
     private Button updateButton;
     private View aboutSelfEditBox;
     private JSONObject user;
@@ -85,6 +87,15 @@ public class Profile extends AppCompatActivity {
         aboutSelfEditBox = findViewById(R.id.aboutSelfEditBox);
         updateButton = findViewById(R.id.aboutButtonSelfEditBox);
         updatedAbout = findViewById(R.id.aboutTextSelfEditBox);
+        backButton = findViewById(R.id.backButtonSelf);
+        settingsButton = findViewById(R.id.imageButtonSettings);
+
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPopupMenu(v);
+            }
+        });
 
         // Show profile picture
         OkHttpClient client = new OkHttpClient();
@@ -121,38 +132,52 @@ public class Profile extends AppCompatActivity {
         editButtonAbout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Make the TextView editable
-                aboutTextViewSelf.setFocusableInTouchMode(true);
-                aboutTextViewSelf.setFocusable(true);
-                aboutTextViewSelf.requestFocus();
-                // Show the aboutSelfEditBox ConstraintLayout
-                aboutSelfEditBox.setVisibility(View.VISIBLE);
-                // Set focus on the updatedAbout TextView
-                updatedAbout.requestFocus();
-                updatedAbout.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                        // Not needed for this implementation of 200 character
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-                        // Not needed for this implementation of 200 character
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable s) {
-                        // Check if the length exceeds 200 characters
-                        if (s.length() > 200) {
-                            // If the length exceeds 200 characters, disable further input
-                            updatedAbout.setEnabled(false);
-                            // Display a message to the user
-                            Toast.makeText(Profile.this, "Maximum character limit reached", Toast.LENGTH_SHORT).show();
+                // Toggle the visibility of aboutSelfEditBox
+                if (aboutSelfEditBox.getVisibility() == View.VISIBLE) {
+                    // If aboutSelfEditBox is visible, hide it
+                    aboutSelfEditBox.setVisibility(View.GONE);
+                } else {
+                    // If aboutSelfEditBox is hidden, show it
+                    aboutSelfEditBox.setVisibility(View.VISIBLE);
+                    // Make the TextView editable
+                    aboutTextViewSelf.setFocusableInTouchMode(true);
+                    aboutTextViewSelf.setFocusable(true);
+                    aboutTextViewSelf.requestFocus();
+                    // Set focus on the updatedAbout TextView
+                    updatedAbout.requestFocus();
+                    updatedAbout.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                            // Not needed for this implementation of 200 character
                         }
-                    }
-                });
+
+                        @Override
+                        public void onTextChanged(CharSequence s, int start, int before, int count) {
+                            // Not needed for this implementation of 200 character
+                        }
+
+                        @Override
+                        public void afterTextChanged(Editable s) {
+                            // Check if the length exceeds 200 characters
+                            if (s.length() > 200) {
+                                // If the length exceeds 200 characters, disable further input
+                                updatedAbout.setEnabled(false);
+                                // Display a message to the user
+                                Toast.makeText(Profile.this, "Maximum character limit reached", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
             }
         });
+
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });;
 
 
         // Set OnClickListener for update button
@@ -169,6 +194,28 @@ public class Profile extends AppCompatActivity {
         // Make Api call
         makeApiCall();
     }
+
+    private void showPopupMenu(View v) {
+        PopupMenu popupMenu = new PopupMenu(this, v);
+        popupMenu.getMenuInflater().inflate(R.layout.menu_options, popupMenu.getMenu());
+
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                int itemId = item.getItemId();
+                if (itemId == R.id.menu_logout) {
+                    // Handle logout action
+                    Toast.makeText(Profile.this, "Logout clicked", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        popupMenu.show();
+    }
+
+
 
     private void updateAboutField(String updatedAboutText) {
         // Construct the JSON object with the updated about text
@@ -190,8 +237,8 @@ public class Profile extends AppCompatActivity {
                     Toast.makeText(Profile.this, "About field updated successfully", Toast.LENGTH_SHORT).show();
                     aboutSelfEditBox.setVisibility(View.GONE); // Hide the aboutSelfEditBox
 
-                    // Restart the activity
-                    restartActivity();
+                    // Update the about TextView directly
+                    aboutTextViewSelf.setText(updatedAboutText);
                 },
                 error -> {
                     // Handle error response
@@ -202,11 +249,6 @@ public class Profile extends AppCompatActivity {
         requestQueue.add(jsonObjectRequest);
     }
 
-    private void restartActivity() {
-        Intent intent = getIntent();
-        finish(); // Finish the current activity
-        startActivity(intent); // Start the activity again
-    }
 
 
 
