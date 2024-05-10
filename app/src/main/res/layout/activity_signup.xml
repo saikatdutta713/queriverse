@@ -177,7 +177,7 @@
             android:autofillHints="" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/signinButton"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="96dp"
@@ -192,7 +192,7 @@
             app:layout_constraintTop_toBottomOf="@+id/cpassword" />
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/googleButton"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="96dp"
@@ -205,7 +205,7 @@
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button" />
+            app:layout_constraintTop_toBottomOf="@+id/signinButton" />
 
         <TextView
             android:id="@+id/textView2"
@@ -215,7 +215,7 @@
             android:text="@string/sign_in_message"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button1" />
+            app:layout_constraintTop_toBottomOf="@+id/googleButton" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,8 @@
 package com.example.queriverse;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -29,14 +32,24 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Response;
+
 public class Profile extends AppCompatActivity {
 
+    private static final String TAG = "Profile log";
     private TextView nameTextViewSelf, emailTextViewSelf, followerTextViewSelf, followingTextViewSelf, numberOfPostTextViewSelf, aboutTextViewSelf, updatedAbout;
     private ImageView profileImageViewSelf;
 
     private ImageButton editButtonAbout;
     private Button updateButton;
     private View aboutSelfEditBox;
+    private JSONObject user;
+    private String UserID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +60,17 @@ public class Profile extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        SharedPreferences preferences = getSharedPreferences("Queriverse", MODE_PRIVATE);
+        try {
+            user = new JSONObject(preferences.getString("user", null));
+            UserID = user.getString("id");
+            //Show profile picture
+//            Picasso.get().load(user.getString("picture")).into(profileImageViewSelf);
+        } catch (JSONException e) {
+            Log.e(TAG, "onCreateException: ".concat(e.getMessage()) );
+            throw new RuntimeException(e);
+        }
 
 
         // Initialize UI elements
@@ -61,6 +85,37 @@ public class Profile extends AppCompatActivity {
         aboutSelfEditBox = findViewById(R.id.aboutSelfEditBox);
         updateButton = findViewById(R.id.aboutButtonSelfEditBox);
         updatedAbout = findViewById(R.id.aboutTextSelfEditBox);
+
+        // Show profile picture
+        OkHttpClient client = new OkHttpClient();
+        okhttp3.Request request = new okhttp3.Request.Builder().url("https://queriverse.bytelure.in/api/users/"+UserID+"/image").build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                Log.d(TAG, "onFailure: "+e.getMessage());
+                call.cancel();
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    try {
+                        assert response.body() != null;
+                        JSONObject jsonObject = new JSONObject(response.body().string());
+                        String imageURL = jsonObject.getString("image_url");
+                        Log.i(TAG, "onCreate: "+imageURL);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Picasso.get().load(imageURL).into(profileImageViewSelf);
+                            }
+                        });
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        });
 
         // Set OnClickListener for edit button
         editButtonAbout.setOnClickListener(new View.OnClickListener() {
@@ -126,7 +181,7 @@ public class Profile extends AppCompatActivity {
         }
 
         // Make a PUT request to update the about field
-        String apiUrl = "https://queriverse.bytelure.in/api/users/3"; // Update the user ID if needed
+        String apiUrl = "https://queriverse.bytelure.in/api/users/"+UserID; // Update the user ID if needed
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, apiUrl, requestData,
@@ -157,7 +212,7 @@ public class Profile extends AppCompatActivity {
 
 
     private void makeApiCall() {
-        String apiUrl = "https://queriverse.bytelure.in/api/users/3";
+        String apiUrl = "https://queriverse.bytelure.in/api/users/"+UserID;
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, apiUrl, null,
@@ -181,7 +236,6 @@ public class Profile extends AppCompatActivity {
                 });
         requestQueue.add(jsonObjectRequest);
     }
-
 
     private ProfileSelf parseJsonResponse(JSONObject response) throws JSONException {
         String name = response.getString("username");
