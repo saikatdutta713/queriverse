@@ -1,5 +1,6 @@
 package com.example.queriverse;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -417,6 +418,22 @@ public class SinglePost extends AppCompatActivity {
         );
 
         requestQueue.add(jsonObjectRequest);
+    }
+
+    public void onHomeClick(View view) {
+        Intent intent = new Intent(this, HomePages.class);
+        startActivity(intent);
+    }
+
+    public void onPostClick(View view) {
+        Intent intent = new Intent(this, CreatePost.class);
+        startActivity(intent);
+
+    }
+
+    public void onProfileClick(View view) {
+        Intent intent = new Intent(this, Profile.class);
+        startActivity(intent);
     }
 
     private interface UserDataCallback {

@@ -120,7 +120,7 @@
             <Button
                 android:id="@+id/userProfileFollow"
                 android:layout_width="wrap_content"
-                android:layout_height="25dp"
+                android:layout_height="40dp"
                 android:paddingHorizontal="10dp"
                 android:drawableStart="@drawable/add"
                 android:background="@drawable/profile_top_banner"
@@ -306,6 +306,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
+            android:onClick="onHomeClick"
             tools:ignore="UseCompoundDrawables,UselessParent">
 
             <ImageView
@@ -351,6 +352,7 @@
             android:layout_marginHorizontal="10dp"
             android:layout_weight="1"
             android:gravity="center"
+            android:onClick="onPostClick"
             android:orientation="vertical"
             tools:ignore="UseCompoundDrawables,UselessParent">
 
@@ -375,6 +377,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
+            android:onClick="onProfileClick"
             tools:ignore="UseCompoundDrawables,UselessParent">
 
             <ImageView

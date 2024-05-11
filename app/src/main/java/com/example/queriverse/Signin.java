@@ -1,6 +1,7 @@
 package com.example.queriverse;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
@@ -246,4 +247,9 @@ public class Signin extends AppCompatActivity {
         }
     }
 
+    public void signupHandle(View view) {
+        Intent intent = new Intent(this, Signup.class);
+        startActivity(intent);
+        finish();
+    }
 }

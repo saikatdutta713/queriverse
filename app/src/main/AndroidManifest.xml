@@ -23,17 +23,15 @@
         </activity>
 
         <activity
-            android:name=".Profile"
-            android:exported="false" />
+            android:name=".Signup"
+            android:exported="true">
+
+        </activity>
 
         <activity
             android:name=".HomePages"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
 
@@ -71,6 +69,11 @@
         <activity
             android:name=".Profile"
             android:exported="true" >
+
+        </activity>
+        <activity
+            android:name=".Splash"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

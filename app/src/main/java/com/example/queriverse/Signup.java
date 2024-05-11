@@ -130,4 +130,10 @@ public class Signup extends AppCompatActivity {
             }
         });
     }
+
+    public void ReirectToSignin(View view) {
+        Intent intent = new Intent(Signup.this, Signin.class);
+        startActivity(intent);
+        finish();
+    }
 }

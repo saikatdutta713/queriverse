@@ -1,5 +1,6 @@
 package com.example.queriverse;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -46,6 +47,13 @@ public class notification extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        SharedPreferences preferences = getSharedPreferences("Queriverse", MODE_PRIVATE);
+        if (!preferences.getAll().containsKey("user")) {
+            Intent intent = new Intent(notification.this, Signin.class);
+            startActivity(intent);
+            finish();
+        }
 
         // Initialize views
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -125,6 +133,24 @@ public class notification extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void onHomeClick(View view) {
+        Intent intent = new Intent(notification.this, HomePages.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public void onPostClick(View view) {
+        Intent intent = new Intent(notification.this, CreatePost.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public void onProfileClick(View view) {
+        Intent intent = new Intent(notification.this, Profile.class);
+        startActivity(intent);
+        finish();
     }
 
     // Callback interface to handle notification retrieval result

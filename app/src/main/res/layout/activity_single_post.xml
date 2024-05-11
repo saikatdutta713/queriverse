@@ -326,6 +326,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
+            android:onClick="onHomeClick"
             tools:ignore="UseCompoundDrawables,UselessParent">
 
             <ImageView
@@ -371,6 +372,7 @@
             android:layout_marginHorizontal="10dp"
             android:layout_weight="1"
             android:gravity="center"
+            android:onClick="onPostClick"
             android:orientation="vertical"
             tools:ignore="UseCompoundDrawables,UselessParent">
 
@@ -395,6 +397,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
+            android:onClick="onProfileClick"
             tools:ignore="UseCompoundDrawables,UselessParent">
 
             <ImageView

@@ -1,5 +1,6 @@
 package com.example.queriverse;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -194,5 +195,21 @@ public class OtherUserProfile extends AppCompatActivity {
         followingTextView.setText(profile.getFollowing());
         numberOfPostTextView.setText(profile.getNumberOfPost());
         aboutTextView.setText(profile.getAbout());
+    }
+
+    public void onHomeClick(View view) {
+        Intent intent = new Intent(OtherUserProfile.this, HomePages.class);
+        startActivity(intent);
+    }
+
+    public void onPostClick(View view) {
+        Intent intent = new Intent(OtherUserProfile.this, CreatePost.class);
+        startActivity(intent);
+    }
+
+    public void onProfileClick(View view) {
+        Intent intent = new Intent(OtherUserProfile.this, Profile.class);
+        startActivity(intent);
+
     }
 }

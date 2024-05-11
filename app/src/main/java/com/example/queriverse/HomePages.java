@@ -2,11 +2,15 @@
 
 package com.example.queriverse;
 
+import android.annotation.SuppressLint;
+import android.app.Notification;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,6 +46,7 @@ public class HomePages extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RequestQueue requestQueue;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,8 +58,17 @@ public class HomePages extends AppCompatActivity {
             return insets;
         });
 
+        SharedPreferences preferences = getSharedPreferences("Queriverse", MODE_PRIVATE);
+        if (!preferences.getAll().containsKey("user")) {
+            Intent intent = new Intent(HomePages.this, Signin.class);
+            startActivity(intent);
+            finish();
+        }
+
         recyclerView = findViewById(R.id.recycler_view_user_list);
         requestQueue = Volley.newRequestQueue(this);
+
+
 
         // Check if the app was opened via a deep link
         Intent intent = getIntent();
@@ -104,6 +118,7 @@ public class HomePages extends AppCompatActivity {
 
     // Inside the parseResponse method
     private void parseResponse(JSONArray response) {
+        Log.i("Postlog", "parseResponse: "+response);
         try {
             for (int i = 0; i < response.length(); i++) {
                 JSONObject postObject = response.getJSONObject(i);
@@ -138,8 +153,8 @@ public class HomePages extends AppCompatActivity {
                         userPost.setPostId(postId); // Set postId for each UserPost object
                         userPostList.add(userPost);
 
-                        // Notify adapter of data change
-                        recyclerView.getAdapter().notifyDataSetChanged();
+                            // Notify adapter of data change
+                            recyclerView.getAdapter().notifyDataSetChanged();
                     }
 
                     @Override
@@ -249,6 +264,27 @@ public class HomePages extends AppCompatActivity {
         );
 
         requestQueue.add(jsonObjectRequest);
+    }
+
+    public void onNotificationClick(View view) {
+        Intent intent = new Intent(HomePages.this, notification.class);
+        startActivity(intent);
+    }
+
+    public void onHomeClick(View view) {
+        Intent intent = new Intent(HomePages.this, HomePages.class);
+        startActivity(intent);
+    }
+
+    public void onPostClick(View view) {
+        Intent intent = new Intent(HomePages.this, CreatePost.class);
+        startActivity(intent);
+
+    }
+
+    public void onProfileClick(View view) {
+        Intent intent = new Intent(HomePages.this, Profile.class);
+        startActivity(intent);
     }
 
 

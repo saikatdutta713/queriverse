@@ -2,6 +2,7 @@ package com.example.queriverse;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -58,6 +59,20 @@ public class CreatePost extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        SharedPreferences preferences = getSharedPreferences("Queriverse", MODE_PRIVATE);
+        if (!preferences.getAll().containsKey("user")) {
+            Intent intent = new Intent(CreatePost.this, Signin.class);
+            startActivity(intent);
+            finish();
+        }
+        try {
+            JSONObject user = new JSONObject(preferences.getString("user", ""));
+            TextView username = findViewById(R.id.username);
+            username.setText(user.getString("username"));
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
 
 //        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
 //        bottomNav.setOnNavigationItemSelectedListener(navListener);
@@ -183,5 +198,23 @@ public class CreatePost extends AppCompatActivity {
                 Toast.makeText(this, "Failed to load image", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    public void onHomeClick(View view) {
+        Intent intent = new Intent(CreatePost.this, HomePages.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public void onPostClick(View view) {
+        Intent intent = new Intent(CreatePost.this, CreatePost.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public void onProfileClick(View view) {
+        Intent intent = new Intent(CreatePost.this, Profile.class);
+        startActivity(intent);
+        finish();
     }
 }

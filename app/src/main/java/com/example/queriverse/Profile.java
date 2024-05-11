@@ -1,5 +1,7 @@
 package com.example.queriverse;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -64,6 +66,11 @@ public class Profile extends AppCompatActivity {
         });
 
         SharedPreferences preferences = getSharedPreferences("Queriverse", MODE_PRIVATE);
+        if (!preferences.getAll().containsKey("user")) {
+            Intent intent = new Intent(Profile.this, Signin.class);
+            startActivity(intent);
+            finish();
+        }
         try {
             user = new JSONObject(preferences.getString("user", null));
             UserID = user.getString("id");
@@ -71,6 +78,7 @@ public class Profile extends AppCompatActivity {
 //            Picasso.get().load(user.getString("picture")).into(profileImageViewSelf);
         } catch (JSONException e) {
             Log.e(TAG, "onCreateException: ".concat(e.getMessage()) );
+
             throw new RuntimeException(e);
         }
 
@@ -164,6 +172,7 @@ public class Profile extends AppCompatActivity {
                                 updatedAbout.setEnabled(false);
                                 // Display a message to the user
                                 Toast.makeText(Profile.this, "Maximum character limit reached", Toast.LENGTH_SHORT).show();
+
                             }
                         }
                     });
@@ -195,6 +204,7 @@ public class Profile extends AppCompatActivity {
         makeApiCall();
     }
 
+    @SuppressLint("ResourceType")
     private void showPopupMenu(View v) {
         PopupMenu popupMenu = new PopupMenu(this, v);
         popupMenu.getMenuInflater().inflate(R.layout.menu_options, popupMenu.getMenu());
@@ -204,11 +214,19 @@ public class Profile extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 int itemId = item.getItemId();
                 if (itemId == R.id.menu_logout) {
-                    // Handle logout action
-                    Toast.makeText(Profile.this, "Logout clicked", Toast.LENGTH_SHORT).show();
-                    return true;
+                    SharedPreferences sharedPreferences = getSharedPreferences("Queriverse", Context.MODE_PRIVATE);
+                    sharedPreferences.edit().remove("user").apply();
+                    if (sharedPreferences.getAll().containsKey("user")) {
+                        Toast.makeText(Profile.this, "Logout failed!", Toast.LENGTH_SHORT).show();
+                        return false;
+                    } else {
+                        Toast.makeText(Profile.this, "Logout successful!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(Profile.this, Signin.class);
+                        startActivity(intent);
+                        finish();
+                    }
                 }
-                return false;
+                return true;
             }
         });
 
@@ -309,5 +327,22 @@ public class Profile extends AppCompatActivity {
         followingTextViewSelf.setText(profile.getFollowingSelf());
         numberOfPostTextViewSelf.setText(profile.getNumberOfPostSelf());
         aboutTextViewSelf.setText(profile.getAboutSelf());
+    }
+
+    public void onHomeClick(View view) {
+        Intent intent = new Intent(Profile.this, HomePages.class);
+        startActivity(intent);
+
+    }
+
+    public void onPostClick(View view) {
+        Intent intent = new Intent(Profile.this, CreatePost.class);
+        startActivity(intent);
+    }
+
+    public void onProfileClick(View view) {
+        Intent intent = new Intent(Profile.this, Profile.class);
+        startActivity(intent);
+
     }
 }
