@@ -45,6 +45,8 @@ public class CreatePost extends AppCompatActivity {
 
     private static final int PICK_IMAGE_REQUEST = 1;
 
+    JSONObject user;
+
     private ImageView imageView;
     private EditText editText;
     private Uri imageUri;
@@ -65,6 +67,14 @@ public class CreatePost extends AppCompatActivity {
             Intent intent = new Intent(CreatePost.this, Signin.class);
             startActivity(intent);
             finish();
+        }
+        else {
+            try {
+                user = new JSONObject(preferences.getString("user", null));
+            } catch (JSONException e) {
+                Log.e(TAG, "onCreateJsonException: "+e.getMessage() );
+                throw new RuntimeException(e);
+            }
         }
         try {
             JSONObject user = new JSONObject(preferences.getString("user", ""));
@@ -127,7 +137,7 @@ public class CreatePost extends AppCompatActivity {
         // Create JSON object for request body
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("user", 10);
+            jsonObject.put("user", user.getInt("id"));
             jsonObject.put("text", text);
             // Add image data to request body if available
             if (imageData != null) {
