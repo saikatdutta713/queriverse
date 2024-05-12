@@ -118,19 +118,41 @@ public class HomePages extends AppCompatActivity {
 
     // Inside the parseResponse method
     private void parseResponse(JSONArray response) {
-        Log.i("Postlog", "parseResponse: "+response);
+        Log.i("Postlog", "parseResponse: " + response);
         try {
             for (int i = 0; i < response.length(); i++) {
+                Log.i("response", "response Length" + i);
                 JSONObject postObject = response.getJSONObject(i);
                 String userId = postObject.getString("user"); // user ID is fetched here
                 String postId = postObject.getString("id"); // Fetch postId from JSON response
                 String postCreatedAt = postObject.getString("created_at");
-                // Declare postDescription as final and initialize it
+
                 final String postDescription = truncateDescription(postObject.getString("text"));
-                String postImageUrl = postObject.getString("image"); // Set a default image or load from URL
-                String postLikes = postObject.getJSONArray("likes").length() + "";
-                String postDislikes = postObject.getJSONArray("dislikes").length() + "";
-                String postComments = postObject.getJSONArray("comments").length() + "";
+                String postImageUrl = postObject.optString("image"); // Set a default image or load from URL
+                final String postLikes;
+                final String postDislikes;
+                final String postComments;
+
+                // Check if "likes" array exists and is not null
+                if (postObject.has("likes") && !postObject.isNull("likes")) {
+                    postLikes = String.valueOf(postObject.getJSONArray("likes").length());
+                } else {
+                    postLikes = "0";
+                }
+
+                // Check if "dislikes" array exists and is not null
+                if (postObject.has("dislikes") && !postObject.isNull("dislikes")) {
+                    postDislikes = String.valueOf(postObject.getJSONArray("dislikes").length());
+                } else {
+                    postDislikes = "0";
+                }
+
+                // Check if "comments" array exists and is not null
+                if (postObject.has("comments") && !postObject.isNull("comments")) {
+                    postComments = String.valueOf(postObject.getJSONArray("comments").length());
+                } else {
+                    postComments = "0";
+                }
 
                 // Calculate time elapsed since post creation
                 long elapsedTimeMillis = System.currentTimeMillis() - getTimeInMillis(postCreatedAt);
@@ -153,8 +175,8 @@ public class HomePages extends AppCompatActivity {
                         userPost.setPostId(postId); // Set postId for each UserPost object
                         userPostList.add(userPost);
 
-                            // Notify adapter of data change
-                            recyclerView.getAdapter().notifyDataSetChanged();
+                        // Notify adapter of data change
+                        recyclerView.getAdapter().notifyDataSetChanged();
                     }
 
                     @Override
@@ -167,6 +189,9 @@ public class HomePages extends AppCompatActivity {
             Log.e("JSONParsingError", "Error parsing JSON response", e);
         }
     }
+
+
+
 
 
 
