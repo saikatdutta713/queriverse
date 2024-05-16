@@ -6,6 +6,10 @@ android {
     namespace = "com.example.queriverse"
     compileSdk = 34
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     defaultConfig {
         applicationId = "com.example.queriverse"
         minSdk = 29

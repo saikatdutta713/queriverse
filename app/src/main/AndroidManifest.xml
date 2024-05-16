@@ -17,21 +17,17 @@
         android:theme="@style/Theme.QueriVerse"
         tools:targetApi="31">
         <activity
+            android:name=".PlayQuiz"
+            android:exported="false" />
+        <activity
             android:name=".Signin"
-            android:exported="true">
-
-        </activity>
-
+            android:exported="true" />
         <activity
             android:name=".Signup"
-            android:exported="true">
-
-        </activity>
-
+            android:exported="true" />
         <activity
             android:name=".HomePages"
             android:exported="true">
-
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
 
@@ -62,15 +58,12 @@
         <activity
             android:name=".CreatePost"
             android:exported="false" />
-
         <activity
             android:name=".notification"
             android:exported="false" />
         <activity
             android:name=".Profile"
-            android:exported="true" >
-
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".Splash"
             android:exported="true">
