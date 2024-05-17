@@ -9,8 +9,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,8 +56,8 @@ public class Signin extends AppCompatActivity {
     private static final int REQUEST_SIGNUP = 0;
     public static String email = null;
     public static String password = null;
-    TextView emailText;
-    TextView passwordText;
+    EditText emailText;
+    EditText passwordText;
 
     private SignInClient oneTapClient;
     private BeginSignInRequest signUpRequest;
@@ -83,6 +87,28 @@ public class Signin extends AppCompatActivity {
                         .setFilterByAuthorizedAccounts(false)
                         .build())
                 .build();
+
+        EditText passwordEditText = findViewById(R.id.password);
+        ImageView eyeIcon = findViewById(R.id.eyeButton);
+
+        eyeIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Toggle password visibility
+                if (passwordEditText.getTransformationMethod() == PasswordTransformationMethod.getInstance()) {
+                    // Password is currently hidden, show it
+                    passwordEditText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    eyeIcon.setImageResource(R.drawable.ic_open_eyes); // Change to open eye icon
+                } else {
+                    // Password is currently visible, hide it
+                    passwordEditText.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    eyeIcon.setImageResource(R.drawable.ic_eye_closed); // Change to closed eye icon
+                }
+                // Move cursor to the end of the text
+                passwordEditText.setSelection(passwordEditText.getText().length());
+            }
+        });
+
 
     }
 
