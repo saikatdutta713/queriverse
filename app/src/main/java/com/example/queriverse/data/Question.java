@@ -1,6 +1,10 @@
+// Question.java
 package com.example.queriverse.data;
 
-public class Question {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Question implements Parcelable {
     private int id;
     private String question;
     private String option1;
@@ -9,7 +13,7 @@ public class Question {
     private String option4;
     private String answer;
     private int checkedValue = -1;
-    private String givenAnswer="";
+    private String givenAnswer = "";
 
     public Question(int id, String question, String option1, String option2, String option3, String option4, String answer) {
         this.id = id;
@@ -21,9 +25,49 @@ public class Question {
         this.answer = answer;
     }
 
-    public Question() {
+    protected Question(Parcel in) {
+        id = in.readInt();
+        question = in.readString();
+        option1 = in.readString();
+        option2 = in.readString();
+        option3 = in.readString();
+        option4 = in.readString();
+        answer = in.readString();
+        checkedValue = in.readInt();
+        givenAnswer = in.readString();
     }
 
+    public static final Creator<Question> CREATOR = new Creator<Question>() {
+        @Override
+        public Question createFromParcel(Parcel in) {
+            return new Question(in);
+        }
+
+        @Override
+        public Question[] newArray(int size) {
+            return new Question[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(question);
+        dest.writeString(option1);
+        dest.writeString(option2);
+        dest.writeString(option3);
+        dest.writeString(option4);
+        dest.writeString(answer);
+        dest.writeInt(checkedValue);
+        dest.writeString(givenAnswer);
+    }
+
+    // Getters and Setters
     public int getId() {
         return id;
     }

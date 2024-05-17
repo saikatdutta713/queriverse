@@ -1,11 +1,12 @@
 package com.example.queriverse;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -34,18 +35,17 @@ import java.util.List;
 public class PlayQuiz extends AppCompatActivity implements View.OnClickListener {
 
     ActivityPlayQuizBinding binding;
-    private RadioButton checkButton[] =new RadioButton[4];
-    int currentIndex=0;
+    private RadioButton checkButton[] = new RadioButton[4];
+    int currentIndex = 0;
     List<Question> questions;
     private CountDownTimer timer;
-    private int timeLeft= Constants.TOTAL_EXAM_TIME;
-
+    private int timeLeft = Constants.TOTAL_EXAM_TIME;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        binding=ActivityPlayQuizBinding.inflate(getLayoutInflater());
+        binding = ActivityPlayQuizBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -55,32 +55,34 @@ public class PlayQuiz extends AppCompatActivity implements View.OnClickListener 
 
         initComponent();
         startTimer();
-
     }
 
-    private void submitTest(){
-        Toast.makeText(this,"Test Sumitted",Toast.LENGTH_SHORT).show();
+    private void submitTest() {
+        Intent intent = new Intent(PlayQuiz.this, QuizResult.class);
+        intent.putParcelableArrayListExtra("questions", (ArrayList<Question>) questions);
+        startActivity(intent);
+        finish();
     }
+
     // Start timer method
     private void startTimer() {
-        timer = new CountDownTimer(Constants.TOTAL_EXAM_TIME*1000,1000) {
+        timer = new CountDownTimer(Constants.TOTAL_EXAM_TIME * 1000, 1000) {
             @SuppressLint("SetTextI18n")
             @Override
             public void onTick(long millisUntilFinished) {
-                int min=timeLeft/60;
-                int sec=timeLeft%60;
-                binding.quizTimmer.setText("Timer: "+min+" min "+sec+" sec ");
+                int min = timeLeft / 60;
+                int sec = timeLeft % 60;
+                binding.quizTimmer.setText("Timer: " + min + " min " + sec + " sec ");
                 timeLeft--;
 
                 //update circular progress bar
-                binding.circularProgressBar.setProgress((float) timeLeft/Constants.TOTAL_EXAM_TIME*100);
+                binding.circularProgressBar.setProgress((float) timeLeft / Constants.TOTAL_EXAM_TIME * 100);
             }
 
             @Override
             public void onFinish() {
                 submitTest();
                 binding.quizTimmer.setText("Finished");
-
             }
         };
         timer.start();
@@ -113,7 +115,7 @@ public class PlayQuiz extends AppCompatActivity implements View.OnClickListener 
                             }
                             // Display the first question
                             if (questions != null && !questions.isEmpty()) {
-                                setQuestionToView(questions.get(0),0);
+                                setQuestionToView(questions.get(0), 0);
                             } else {
                                 Toast.makeText(PlayQuiz.this, "No questions available", Toast.LENGTH_SHORT).show();
                             }
@@ -135,68 +137,80 @@ public class PlayQuiz extends AppCompatActivity implements View.OnClickListener 
         requestQueue.add(jsonArrayRequest);
     }
 
-
     private void initComponent() {
-
         checkButton[0] = binding.option1;
         checkButton[1] = binding.option2;
         checkButton[2] = binding.option3;
         checkButton[3] = binding.option4;
 
-        for(RadioButton button : checkButton) {
+        for (RadioButton button : checkButton) {
             button.setOnClickListener(this);
         }
 
         fetchQuestions();
 
-        binding.previousButton.setOnClickListener(e->{
-            previousQuestion();
-        });
+        binding.previousButton.setOnClickListener(e -> previousQuestion());
 
-        binding.nextButton.setOnClickListener(e->{
-            nextQuestion();
-        });
+        binding.nextButton.setOnClickListener(e -> nextQuestion());
 
+        binding.quizSubmitButton.setOnClickListener(e -> submitTest());
     }
 
     private void previousQuestion() {
-        if (currentIndex-1<0){
+        if (currentIndex - 1 < 0) {
             Toast.makeText(this, "Already at 0th position", Toast.LENGTH_SHORT).show();
         } else {
-            currentIndex = currentIndex - 1 ;
+            currentIndex = currentIndex - 1;
             setQuestionToView(questions.get(currentIndex), currentIndex);
         }
     }
 
     private void nextQuestion() {
-        if (currentIndex+1>questions.size()-1){
+        if (currentIndex + 1 > questions.size() - 1) {
             Toast.makeText(this, "Already at last question", Toast.LENGTH_SHORT).show();
-        }else {
-            currentIndex = currentIndex +1;
+        } else {
+            currentIndex = currentIndex + 1;
             setQuestionToView(questions.get(currentIndex), currentIndex);
         }
     }
 
     @Override
     public void onClick(View v) {
-        //Toast.makeText(this, "button clicked", Toast.LENGTH_SHORT).show();
         RadioButton buttonClicked = (RadioButton) v;
-        for (RadioButton button : checkButton){
+
+        // Log the ID of the clicked RadioButton
+        Log.d("RadioButtonClicked", "ID: " + buttonClicked.getId());
+
+        // Set the checked state of all RadioButtons
+        for (RadioButton button : checkButton) {
             button.setChecked(button.getId() == buttonClicked.getId());
         }
 
+        // Extract only the answer letter without the option text
+        String buttonText = buttonClicked.getText().toString();
+        String givenAnswer = buttonText.substring(0, 1); // Extract the first character after the period
+
+        // Update the checked value and given answer for the current question
         questions.get(currentIndex).setCheckedValue(buttonClicked.getId());
+        questions.get(currentIndex).setGivenAnswer(givenAnswer);
+
+        // Log the updated checked value and given answer for the current question
+        Log.d("QuestionUpdated", "CheckedValue: " + questions.get(currentIndex).getCheckedValue());
+        Log.d("QuestionUpdated", "GivenAnswer: " + questions.get(currentIndex).getGivenAnswer());
     }
 
-    @SuppressLint("SetTextI18n")
-    private void setQuestionToView(Question question, int index){
-        binding.quizQuestion.setText((currentIndex + 1) + "." + question.getQuestion());
-        binding.option1.setText(question.getOption1());
-        binding.option2.setText(question.getOption2());
-        binding.option3.setText(question.getOption3());
-        binding.option4.setText(question.getOption4());
 
-        for (RadioButton button:checkButton){
+
+
+    @SuppressLint("SetTextI18n")
+    private void setQuestionToView(Question question, int index) {
+        binding.quizQuestion.setText((currentIndex + 1) + "." + question.getQuestion());
+        binding.option1.setText("A. "+question.getOption1());
+        binding.option2.setText("B. "+question.getOption2());
+        binding.option3.setText("C. "+question.getOption3());
+        binding.option4.setText("D. "+question.getOption4());
+
+        for (RadioButton button : checkButton) {
             button.setChecked(questions.get(currentIndex).getCheckedValue() == button.getId());
         }
     }
