@@ -47,4 +47,6 @@ dependencies {
     // Picasso for image loading
     implementation ("com.squareup.picasso:picasso:2.71828")
     implementation("com.google.android.gms:play-services-auth:21.1.1")
+
+    implementation ("com.mikhaellopez:circularprogressbar:3.1.0")
 }
