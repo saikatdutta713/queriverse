@@ -29,7 +29,6 @@
         android:layout_height="wrap_content"
         android:textSize="22sp"
         android:textStyle="bold"
-        android:text="1. What is programming? what is use of programming in health sector"
         android:layout_marginTop="80dp"
         android:layout_marginHorizontal="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,7 +53,6 @@
                 android:id="@+id/option1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Talk To Computer"
                 android:layout_weight="1"/>
 
             <RadioButton
@@ -62,7 +60,6 @@
                 android:layout_width="0dp"
                 android:layout_marginLeft="10dp"
                 android:layout_height="wrap_content"
-                android:text="For Creating Software"
                 android:layout_weight="1"/>
 
         </LinearLayout>
@@ -83,7 +80,6 @@
             android:id="@+id/option3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="For creating web Apps "
             android:layout_weight="1"/>
 
         <RadioButton
@@ -91,7 +87,6 @@
             android:layout_width="0dp"
             android:layout_marginLeft="10dp"
             android:layout_height="wrap_content"
-            android:text="None of these"
             android:layout_weight="1"/>
 
     </LinearLayout>

@@ -134,4 +134,9 @@ public class QuizResult extends AppCompatActivity {
         Intent intent = new Intent(QuizResult.this, HomePages.class);
         startActivity(intent);
     }
+
+    public void playQuiz(View view) {
+        Intent intent = new Intent(QuizResult.this, QuizCategory.class);
+        startActivity(intent);
+    }
 }

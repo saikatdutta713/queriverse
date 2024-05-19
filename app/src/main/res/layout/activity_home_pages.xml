@@ -111,6 +111,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
+            android:onClick="playQuiz"
             tools:ignore="UseCompoundDrawables,UselessParent">
 
             <ImageView
@@ -122,9 +123,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/trends_btn"
+                android:text="Play Quiz"
                 android:textColor="@color/black"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                tools:ignore="HardcodedText" />
         </LinearLayout>
 
         <LinearLayout

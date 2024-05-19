@@ -37,6 +37,9 @@ import okhttp3.Response;
 
 public class notification extends AppCompatActivity {
 
+    private static final String TAG = "Notification log";
+
+    private int userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +56,14 @@ public class notification extends AppCompatActivity {
             Intent intent = new Intent(notification.this, Signin.class);
             startActivity(intent);
             finish();
+        }
+        try {
+            JSONObject user = new JSONObject(preferences.getString("user", ""));
+            Log.d(TAG, "onCreate: "+user);
+//            userId = user.getInt("id");
+        } catch (JSONException e) {
+            Log.i(TAG, "onCreateUserException: "+e.getMessage() );
+            throw new RuntimeException(e);
         }
 
         // Initialize views
@@ -92,7 +103,7 @@ public class notification extends AppCompatActivity {
 
     // Method to fetch notifications from API
     private void getNotifications(final NotificationsCallback callback) {
-        String url = "https://queriverse.bytelure.in/api/notifications";
+        String url = "https://queriverse.bytelure.in/api/notifications/"+userId;
         String TAG = "apilog";
 
         OkHttpClient client = new OkHttpClient();
@@ -151,6 +162,11 @@ public class notification extends AppCompatActivity {
         Intent intent = new Intent(notification.this, Profile.class);
         startActivity(intent);
         finish();
+    }
+
+    public void playQuiz(View view) {
+        Intent intent = new Intent(notification.this, QuizCategory.class);
+        startActivity(intent);
     }
 
     // Callback interface to handle notification retrieval result

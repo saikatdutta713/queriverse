@@ -436,6 +436,11 @@ public class SinglePost extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void playQuiz(View view) {
+        Intent intent = new Intent(SinglePost.this, QuizCategory.class);
+        startActivity(intent);
+    }
+
     private interface UserDataCallback {
         void onSuccess(String username, String authorImage);
 

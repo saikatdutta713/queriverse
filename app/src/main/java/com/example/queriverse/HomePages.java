@@ -312,6 +312,11 @@ public class HomePages extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void playQuiz(View view) {
+        Intent intent = new Intent(HomePages.this, QuizCategory.class);
+        startActivity(intent);
+    }
+
 
     interface UserDataCallback {
         void onSuccess(String username, String authorImage);

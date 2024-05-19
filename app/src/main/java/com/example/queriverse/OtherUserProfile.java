@@ -212,4 +212,9 @@ public class OtherUserProfile extends AppCompatActivity {
         startActivity(intent);
 
     }
+
+    public void playQuiz(View view) {
+        Intent intent = new Intent(OtherUserProfile.this, QuizCategory.class);
+        startActivity(intent);
+    }
 }

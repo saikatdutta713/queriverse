@@ -345,4 +345,10 @@ public class Profile extends AppCompatActivity {
         startActivity(intent);
 
     }
+
+    public void playQuiz(View view) {
+        Intent intent = new Intent(Profile.this, QuizCategory.class);
+        startActivity(intent);
+
+    }
 }

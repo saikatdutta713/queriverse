@@ -30,11 +30,29 @@ public class QuizCategory extends AppCompatActivity {
 
         String value = (String) view.getTag();
 
-        // Perform the action based on the value
-        Toast.makeText(this, "Button clicked with value: " + value, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, PlayQuiz.class);
         intent.putExtra("category", value);
         startActivity(intent);
 
+    }
+
+    public void onHomeClick(View view) {
+        Intent intent = new Intent(QuizCategory.this, HomePages.class);
+        startActivity(intent);
+    }
+
+    public void playQuiz(View view) {
+        Intent intent = new Intent(QuizCategory.this, QuizCategory.class);
+        startActivity(intent);
+    }
+
+    public void onPostClick(View view) {
+        Intent intent = new Intent(QuizCategory.this, CreatePost.class);
+        startActivity(intent);
+    }
+
+    public void onProfileClick(View view) {
+        Intent intent = new Intent(QuizCategory.this, Profile.class);
+        startActivity(intent);
     }
 }
